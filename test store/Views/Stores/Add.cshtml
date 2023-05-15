@@ -1,0 +1,65 @@
+﻿@model test_store.Models.Store
+
+@{
+    ViewData["Title"] = "Add ";
+}
+
+<h1>Index</h1>
+
+@*<p>
+    <a asp-action="Create">Create New</a>
+</p>*@
+
+<form method="post" action="Add">
+    <div class="form-group">
+        <label for="exampleInputShortname">Store shortname</label>
+        <input class="form-control" id="exampleInputShortname" placeholder="Enter shortname" asp-for="Shortname">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputFullname">Fullname</label>
+        <input class="form-control" id="exampleInputPassword" placeholder="Fullname" asp-for="Fullname">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputIdPerson">IdPerson</label>
+        <input class="form-control" id="exampleInputIdPerson" placeholder="Enter IdPerson" asp-for="IdPerson">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    
+</form>
+
+@*<table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Shortname)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Fullname)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IdPerson)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Shortname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fullname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdPerson)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>*@

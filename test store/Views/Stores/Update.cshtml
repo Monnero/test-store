@@ -1,0 +1,28 @@
+﻿@model test_store.Models.Store
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<form method="post" action="Update">
+    <div class="form-group">
+        <label for="exampleInputStorId">Store ID</label>
+        <input class="form-control" id="exampleInputShortname" placeholder="Enter Store ID" asp-for="Id">
+    </div>
+
+    <div class="form-group">
+        <label for="exampleInputShortname">Store shortname</label>
+        <input class="form-control" id="exampleInputShortname" placeholder="Enter new shortname" asp-for="Shortname">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputFullname">Fullname</label>
+        <input class="form-control" id="exampleInputPassword" placeholder="Enter new Fullname" asp-for="Fullname">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputIdPerson">IdPerson</label>
+        <input class="form-control" id="exampleInputIdPerson" placeholder="Enter new IdPerson" asp-for="IdPerson">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

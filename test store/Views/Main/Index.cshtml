@@ -1,0 +1,53 @@
+﻿@model mainModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="card-body">
+    <ul>
+        <li>
+            <a class="nav-link" asp-controller="Stores" asp-action="Add">Add Store</a>
+
+            <a class="nav-link" asp-controller="Stores" asp-action="Delete">Delete Store</a>
+
+            <a class="nav-link" asp-controller="Stores" asp-action="Update">Update Store</a>
+
+        </li>
+    </ul>
+
+    <div class="col-3">
+        <p>List 1</p>
+        <table>
+            @foreach (Store store in Model.Store)
+            {
+                <tr>
+                    <td>
+                        @store.Shortname
+                    </td>
+                    <td>
+                        @store.Fullname
+                    </td>
+                </tr>
+
+            }
+        </table>
+    </div>
+    <div class="col-2">
+        <p>List 2</p>
+        <table>
+            @foreach (Person person in Model.Person)
+            {
+                <tr>
+                    <td>
+                        @person.Name
+                    </td>
+                    <td>
+                        @person.Birth
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+
+</div>
