@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using test_store.DAL;
 
 namespace test_store
 {
@@ -27,8 +26,6 @@ namespace test_store
         {
             services.AddControllersWithViews();
 
-            services.AddDbContext<StoreDbContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("Default")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

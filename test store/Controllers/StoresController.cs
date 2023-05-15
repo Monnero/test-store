@@ -2,7 +2,6 @@
 using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
-using test_store.DAL;
 using test_store.Models;
 using Windows.Storage;
 
