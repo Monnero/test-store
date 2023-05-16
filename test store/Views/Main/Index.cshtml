@@ -1,53 +1,106 @@
 ﻿@model mainModel
-
+@using GridMvc.Html
 @{
     ViewData["Title"] = "Index";
 }
 
-<div class="card-body">
-    <ul>
-        <li>
-            <a class="nav-link" asp-controller="Stores" asp-action="Add">Add Store</a>
+<!DOCTYPE html>
 
-            <a class="nav-link" asp-controller="Stores" asp-action="Delete">Delete Store</a>
 
-            <a class="nav-link" asp-controller="Stores" asp-action="Update">Update Store</a>
+<html>
 
-        </li>
-    </ul>
+<body>
 
-    <div class="col-3">
-        <p>List 1</p>
-        <table>
-            @foreach (Store store in Model.Store)
-            {
+    <div class="container">
+        <div class="row">
+            <ul>
+                <li>
+                    <a class="nav-link" asp-controller="Stores" asp-action="Add">Add Store</a>
+                </li>
+                <li>
+                    <a class="nav-link" asp-controller="Stores" asp-action="Delete">Delete Store</a>
+                </li>
+                <li>
+                    <a class="nav-link" asp-controller="Stores" asp-action="Update">Update Store</a>
+                </li>
+
+            </ul>
+
+            <div class="col-4">
+                <p>Stores</p>
+                <table class="Grid" id="MainGrid">
+                    <tr>
+                        <td>
+                            ID
+                        </td>
+                        <td>
+                            Shortname
+                        </td>
+                        <td>
+                            FullName
+                        </td>
+                        <td>
+                            Person ID
+                        </td>
+                    </tr>
+                    @foreach (Store store in Model.Store)
+                    {
+                        <tr>
+                            <td>
+                                @store.Id
+
+                            </td>
+                            <td>
+                                @store.Shortname
+                            </td>
+                            <td>
+                                @store.Fullname
+                            </td>
+                            <td>
+                                @store.IdPerson
+                            </td>
+                            <td>
+                                <button id="getResults">click</button>
+                            </td>
+                        </tr>
+                        //<partial name="View" model="Model.Person" />
+
+                    }
+
+                </table>
+            </div>
+            @*<div class="col-3" id="Details">
+            <p>Employees</p>
+            <table>
                 <tr>
-                    <td>
-                        @store.Shortname
-                    </td>
-                    <td>
-                        @store.Fullname
-                    </td>
-                </tr>
+                    <td>Id</td>
+                    <td>Name</td>
+                    <td>Birth</td>
 
-            }
-        </table>
-    </div>
-    <div class="col-2">
-        <p>List 2</p>
-        <table>
-            @foreach (Person person in Model.Person)
-            {
-                <tr>
-                    <td>
-                        @person.Name
-                    </td>
-                    <td>
-                        @person.Birth
-                    </td>
                 </tr>
-            }
-        </table>
-    </div>
+                @if (Model.Person != null)
+                    @foreach (Person person in Model.Person)
+                    {
+                        <tr>
+                            <td>
+                                @person.Id
+                            </td>
+                            <td>
+                                @person.Name
+                            </td>
+                            <td>
+                                @person.Birth
+                            </td>
 
-</div>
+                        </tr>
+                    }
+
+            </table>
+
+        </div>*@
+        <div>
+            <input type="button" value="Create" onclick="location.href='@Url.Action("PeopleSearch", "Person")'" />
+        </div>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Person>
+
+<div id="searchpersons">
+    <p>Employees</p>
+    <table>
+        <tr>
+            <td>Id</td>
+            <td>Name</td>
+            <td>Birth</td>
+
+        </tr>
+            @foreach (Person person in Model)
+            {
+                <tr>
+                    <td>
+                        @person.Id
+                    </td>
+                    <td>
+                        @person.Name
+                    </td>
+                    <td>
+                        @person.Birth
+                    </td>
+
+                </tr>
+            }
+
+    </table>
+
+</div>
