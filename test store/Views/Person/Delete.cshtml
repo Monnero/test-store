@@ -1,0 +1,17 @@
+﻿@model test_store.Models.Person
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete Person</h1>
+
+<form method="post" action="Delete">
+    <div class="form-group">
+        <label for="exampleInputPersonId">Person ID</label>
+        <input class="form-control" id="exampleInputId" placeholder="Enter Person ID" asp-for="Id">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+</form>

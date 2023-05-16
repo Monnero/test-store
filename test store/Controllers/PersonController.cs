@@ -19,15 +19,92 @@ namespace test_store.Controllers
             return View();
         }
         SqliteConnection con = new SqliteConnection();
-        List<Person> personList = new List<Person>();
+        //List<Person> personList = new List<Person>();
 
+        //[HttpGet]
+        //protected List<Person> GetPersons(int id)
+        //{
+
+        //    var newperson = new Person()
+        //    {
+        //        Id = id
+        //    };
+
+        //    con.ConnectionString = Properties.Resources.ConnectionString;
+
+        //    SQLitePCL.Batteries.Init();
+        //    SQLitePCL.raw.sqlite3_win32_set_directory(1, ApplicationData.Current.LocalFolder.Path);
+        //    SQLitePCL.raw.sqlite3_win32_set_directory(2, ApplicationData.Current.TemporaryFolder.Path);
+
+        //    con.Open();
+        //    SqliteCommand com = new SqliteCommand
+        //    {
+        //        Connection = con,
+        //        CommandText = $"select * from Person where id = {newperson.Id}"
+        //    };
+
+        //    SqliteDataReader dr = com.ExecuteReader();
+
+        //    while (dr.Read())
+        //    {
+        //        personList.Add(new Person()
+        //        {
+        //            Id = Convert.ToInt32(dr["id"]),
+        //            Name = dr["name"].ToString(),
+        //            Birth = Convert.ToDateTime(dr["birth"]).Date
+        //        });
+        //    }
+        //    con.Close();
+
+        //    return personList;
+
+        //}
+        //[HttpPost]
+        //public PartialViewResult Details(int personId)
+        //{
+        //    mainModel mainModel = new mainModel();
+
+        //    mainModel.Person = GetPersons(2);
+
+        //    return PartialView(mainModel.Person);
+        //}
+        //public IActionResult Test()
+        //{
+        //    Person person = new Person()
+        //    {
+        //        Id = 5,
+        //        Name = "test",
+        //        Birth = DateTime.Now
+        //    };
+        //    return View(person);
+        //}
+        //public PartialViewResult GetDetails()
+        //{
+        //    personList = GetPersons(1);
+        //    return new PartialViewResult
+        //    {
+        //        ViewName = "_Details",
+        //        ViewData = new ViewDataDictionary<List<Person>>(ViewData, personList)
+        //    };
+        //}
+        //[HttpPost]
+        //public ActionResult PeopleSearch(int id)
+        //{
+        //    var personList = GetPersons(id);
+        //    return PartialView(personList);
+        //}
         [HttpGet]
-        protected List<Person> GetPersons(int id)
+        public IActionResult Add()
         {
-            
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Add(Person addPersonRequest)
+        {
             var newperson = new Person()
             {
-                Id = id
+                Name = addPersonRequest.Name,
+                Birth = addPersonRequest.Birth
             };
 
             con.ConnectionString = Properties.Resources.ConnectionString;
@@ -37,61 +114,77 @@ namespace test_store.Controllers
             SQLitePCL.raw.sqlite3_win32_set_directory(2, ApplicationData.Current.TemporaryFolder.Path);
 
             con.Open();
-            SqliteCommand com = new SqliteCommand
-            {
-                Connection = con,
-                CommandText = $"select * from Person where id = {newperson.Id}"
-            };
+            SqliteCommand com = new SqliteCommand();
+            com.Connection = con;
+            com.CommandText = $"insert into Person (name, birth) values ('{newperson.Name}', '{ newperson.Birth}')";
 
-            SqliteDataReader dr = com.ExecuteReader();
+            com.ExecuteNonQuery();
 
-            while (dr.Read())
-            {
-                personList.Add(new Person()
-                {
-                    Id = Convert.ToInt32(dr["id"]),
-                    Name = dr["name"].ToString(),
-                    Birth = Convert.ToDateTime(dr["birth"]).Date
-                });
-            }
             con.Close();
 
-            return personList;
-
+            return Redirect("/Main/Index");
+        }
+        public IActionResult Delete()
+        {
+            return View();
         }
         [HttpPost]
-        public PartialViewResult Details(int personId)
+        public IActionResult Delete(Person addPersonRequest)
         {
-            mainModel mainModel = new mainModel();
-            
-            mainModel.Person = GetPersons(2);
+            var newperson = new Person()
+            {
+                Id = addPersonRequest.Id
+            };
 
-            return PartialView(mainModel.Person);
+            con.ConnectionString = Properties.Resources.ConnectionString;
+
+            SQLitePCL.Batteries.Init();
+            SQLitePCL.raw.sqlite3_win32_set_directory(1, ApplicationData.Current.LocalFolder.Path);
+            SQLitePCL.raw.sqlite3_win32_set_directory(2, ApplicationData.Current.TemporaryFolder.Path);
+
+            con.Open();
+            SqliteCommand com = new SqliteCommand();
+            com.Connection = con;
+            com.CommandText = $"delete from Person where id = {newperson.Id}";
+
+            com.ExecuteNonQuery();
+
+            con.Close();
+
+            return Redirect("/Main/Index");
         }
-        public JsonResult Test()
+        public IActionResult Update()
         {
-            Person person = new Person()
-            {
-                Id = 5,
-                Name = "test",
-                Birth = DateTime.Now
-            };
-            return Json(person);
-        }
-        public PartialViewResult GetDetails()
-        {
-            personList = GetPersons(1);
-            return new PartialViewResult
-            {
-                ViewName = "_Details",
-                ViewData = new ViewDataDictionary<List<Person>>(ViewData, personList)
-            };
+
+            return View();
         }
         [HttpPost]
-        public ActionResult PeopleSearch(int id)
+        public IActionResult Update(Person addPersonRequest)
         {
-            var personList = GetPersons(id);
-            return PartialView(personList);
+            var newperson = new Person()
+            {
+                Id = addPersonRequest.Id,
+                Name = addPersonRequest.Name,
+                Birth = addPersonRequest.Birth
+            };
+
+            con.ConnectionString = Properties.Resources.ConnectionString;
+
+            SQLitePCL.Batteries.Init();
+            SQLitePCL.raw.sqlite3_win32_set_directory(1, ApplicationData.Current.LocalFolder.Path);
+            SQLitePCL.raw.sqlite3_win32_set_directory(2, ApplicationData.Current.TemporaryFolder.Path);
+
+            con.Open();
+            SqliteCommand com = new SqliteCommand();
+            com.Connection = con;
+            com.CommandText = $"update Person set name = '{newperson.Name}', birth = '{newperson.Birth}'" +
+                $" where id = {newperson.Id}";
+
+            com.ExecuteNonQuery();
+
+            con.Close();
+
+            return Redirect("/Main/Index");
         }
     }
 }

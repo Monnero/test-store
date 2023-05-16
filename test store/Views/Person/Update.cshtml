@@ -1,0 +1,25 @@
+﻿@model test_store.Models.Person
+
+@{
+    ViewData["Title"] = "Update";
+}
+
+<h1>Update Person</h1>
+
+<form method="post" action="Update">
+    <div class="form-group">
+        <label for="exampleInputPersonId">Person ID</label>
+        <input class="form-control" id="exampleInputShortname" placeholder="Enter Person ID" asp-for="Id">
+    </div>
+
+    <div class="form-group">
+        <label for="exampleInputName">Person Name</label>
+        <input class="form-control" id="exampleInputShortname" placeholder="Enter new Shortname" asp-for="Name">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputBirth">Person Birth</label>
+        <input class="form-control" id="exampleInputPassword" placeholder="Enter new Fullname" asp-for="Birth">
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

@@ -45,7 +45,6 @@ namespace test_store.Controllers
         }
         public IActionResult Delete()
         {
-
             return View();
         }
         [HttpPost]

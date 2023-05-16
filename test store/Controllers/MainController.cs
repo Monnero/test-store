@@ -17,14 +17,16 @@ namespace test_store.Controllers
 {
     public class MainController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Index(int? personId)
         {
             
             mainModel mainModel = new mainModel();
             mainModel.Store = GetStore();
-            //mainModel.Person = GetPerson();
+            if(personId > 0)
+                mainModel.Person = GetPersons(personId);
             return View(mainModel);
         }
+
 
         SqliteConnection con = new SqliteConnection();
 
@@ -57,7 +59,45 @@ namespace test_store.Controllers
             
             return storeList;
         }
-        
-       
+        List<Person> personList = new List<Person>();
+
+        [HttpGet]
+        protected List<Person> GetPersons(int? id)
+        {
+
+            var newperson = new Person()
+            {
+                Id = (int)id
+            };
+
+            con.ConnectionString = Properties.Resources.ConnectionString;
+
+            SQLitePCL.Batteries.Init();
+            SQLitePCL.raw.sqlite3_win32_set_directory(1, ApplicationData.Current.LocalFolder.Path);
+            SQLitePCL.raw.sqlite3_win32_set_directory(2, ApplicationData.Current.TemporaryFolder.Path);
+
+            con.Open();
+            SqliteCommand com = new SqliteCommand
+            {
+                Connection = con,
+                CommandText = $"select * from Person where id = {newperson.Id}"
+            };
+
+            SqliteDataReader dr = com.ExecuteReader();
+
+            while (dr.Read())
+            {
+                personList.Add(new Person()
+                {
+                    Id = Convert.ToInt32(dr["id"]),
+                    Name = dr["name"].ToString(),
+                    Birth = Convert.ToDateTime(dr["birth"])
+                });
+            }
+            con.Close();
+
+            return personList;
+
+        }
     }
 }

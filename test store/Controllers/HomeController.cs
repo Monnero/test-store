@@ -51,7 +51,5 @@ namespace test_store.Controllers
             
             return View();
         }
-
-       
     }
 }
